@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="TimeZoneNames : Provides localized time zone names using CLDR and TZDB sources.">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>TimeZoneNames</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/mj1856/TimeZoneNames">View on GitHub</a>
+
+          <h1 id="project_title">TimeZoneNames</h1>
+          <h2 id="project_tagline">Provides localized time zone names using CLDR and TZDB sources.</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/mj1856/TimeZoneNames/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/mj1856/TimeZoneNames/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a id="timezonenames" class="anchor" href="#timezonenames" aria-hidden="true"><span class="octicon octicon-link"></span></a>TimeZoneNames</h1>
+
+<p>Simple portable class library that provides localized time zone names using CLDR and TZDB sources.</p>
+
+<p>Why?  Because .NET's usual time zone display names are not localized properly, and are often wrong.
+Read <a href="http://codeofmatt.com/2014/12/26/localized-time-zone-names-in-net/">this blog post</a> for more details.</p>
+
+<p><strong>Nuget Installation</strong></p>
+
+<pre><code>PM&gt; Install-Package TimeZoneNames
+</code></pre>
+
+<p><strong>Usage</strong></p>
+
+<p>Look up the localized names for a specific time zone:</p>
+
+<pre><code>var names = TimeZoneNames.GetNamesForTimeZone("America/Los_Angeles", "en-US");
+
+names.Generic == "Pacific Time"
+names.Standard == "Pacific Standard Time"
+names.Daylight == "Pacific Daylight Time"
+</code></pre>
+
+<pre><code>var names = TimeZoneNames.GetNamesForTimeZone("America/Los_Angeles", "fr-CA");
+
+names.Generic == "heure du Pacifique"
+names.Standard == "heure normale du Pacifique"
+names.Daylight == "heure avancée du Pacifique"
+</code></pre>
+
+<p>You can pass a Windows time zone id instead, if you like:</p>
+
+<pre><code>var names = TimeZoneNames.GetNamesForTimeZone("Romance Standard Time", "en-GB");
+
+names.Generic == "Central European Time"
+names.Standard == "Central European Standard Time"
+names.Daylight == "Central European Summer Time"
+</code></pre>
+
+<p>Abbreviations are also avaialble:</p>
+
+<pre><code>var abbreviations = TimeZoneNames.GetAbbreviationsForTimeZone("America/Los_Angeles", "en-US");
+
+abbreviations.Generic == "PT"
+abbreviations.Standard == "PST"
+abbreviations.Daylight == "PDT"
+</code></pre>
+
+<p>Look up the time zones for a specific country:</p>
+
+<pre><code>string[] zones = TimeZoneNames.GetTimeZoneIdsForCountry("AU");
+</code></pre>
+
+<p><em>Output</em></p>
+
+<pre><code>Australia/Lord_Howe
+Antarctica/Macquarie
+Australia/Hobart
+Australia/Currie
+Australia/Melbourne
+Australia/Sydney
+Australia/Broken_Hill
+Australia/Brisbane
+Australia/Lindeman
+Australia/Adelaide
+Australia/Darwin
+Australia/Perth
+Australia/Eucla
+</code></pre>
+
+<p>Get the time zone names for a specific country:</p>
+
+<pre><code>var zones = TimeZoneNames.GetTimeZonesForCountry("BR", "pt-BR");
+</code></pre>
+
+<p><em>Output</em></p>
+
+<pre><code>America/Noronha
+Generic  = Horário de Fernando de Noronha
+Standard = Horário Padrão de Fernando de Noronha
+Daylight = Horário de Verão de Fernando de Noronha
+
+America/Belem
+Generic  = Horário de Brasília
+Standard = Horário Padrão de Brasília
+Daylight = Horário de Verão de Brasília
+
+America/Fortaleza
+Generic  = Horário de Brasília
+Standard = Horário Padrão de Brasília
+Daylight = Horário de Verão de Brasília
+
+America/Recife
+Generic  = Horário de Brasília
+Standard = Horário Padrão de Brasília
+Daylight = Horário de Verão de Brasília
+
+America/Araguaina
+Generic  = Horário de Brasília
+Standard = Horário Padrão de Brasília
+Daylight = Horário de Verão de Brasília
+
+America/Maceio
+Generic  = Horário de Brasília
+Standard = Horário Padrão de Brasília
+Daylight = Horário de Verão de Brasília
+
+America/Bahia
+Generic  = Horário de Brasília
+Standard = Horário Padrão de Brasília
+Daylight = Horário de Verão de Brasília
+
+America/Sao_Paulo
+Generic  = Horário de Brasília
+Standard = Horário Padrão de Brasília
+Daylight = Horário de Verão de Brasília
+
+America/Campo_Grande
+Generic  = Horário do Amazonas
+Standard = Horário Padrão do Amazonas
+Daylight = Horário de Verão do Amazonas
+
+America/Cuiaba
+Generic  = Horário do Amazonas
+Standard = Horário Padrão do Amazonas
+Daylight = Horário de Verão do Amazonas
+
+America/Santarem
+Generic  = Horário de Brasília
+Standard = Horário Padrão de Brasília
+Daylight = Horário de Verão de Brasília
+
+America/Porto_Velho
+Generic  = Horário do Amazonas
+Standard = Horário Padrão do Amazonas
+Daylight = Horário de Verão do Amazonas
+
+America/Boa_Vista
+Generic  = Horário do Amazonas
+Standard = Horário Padrão do Amazonas
+Daylight = Horário de Verão do Amazonas
+
+America/Manaus
+Generic  = Horário do Amazonas
+Standard = Horário Padrão do Amazonas
+Daylight = Horário de Verão do Amazonas
+
+America/Eirunepe
+Generic  = Horário do Acre
+Standard = Horário Padrão do Acre
+Daylight = Horário de Verão do Acre
+
+America/Rio_Branco
+Generic  = Horário do Acre
+Standard = Horário Padrão do Acre
+Daylight = Horário de Verão do Acre
+</code></pre>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">TimeZoneNames maintained by <a href="https://github.com/mj1856">mj1856</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
