@@ -34,6 +34,8 @@
         <h1>
 <a id="timezonenames" class="anchor" href="#timezonenames" aria-hidden="true"><span class="octicon octicon-link"></span></a>TimeZoneNames</h1>
 
+<p><a href="https://gitter.im/mj1856/TimeZoneNames?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://badges.gitter.im/Join%20Chat.svg" alt="Join the chat at https://gitter.im/mj1856/TimeZoneNames"></a></p>
+
 <p>Simple portable class library that provides localized time zone names using CLDR and TZDB sources.</p>
 
 <p>Why?  Because .NET's usual time zone display names are not localized properly, and are often wrong.
@@ -41,49 +43,43 @@ Read <a href="http://codeofmatt.com/2014/12/26/localized-time-zone-names-in-net/
 
 <p><strong>Nuget Installation</strong></p>
 
-<pre><code>PM&gt; Install-Package TimeZoneNames
-</code></pre>
+<div class="highlight highlight-powershell"><pre>PM<span class="pl-k">&gt;</span> <span class="pl-c1">Install-Package</span> TimeZoneNames</pre></div>
 
 <p><strong>Usage</strong></p>
 
 <p>Look up the localized names for a specific time zone:</p>
 
-<pre><code>var names = TimeZoneNames.GetNamesForTimeZone("America/Los_Angeles", "en-US");
+<div class="highlight highlight-csharp"><pre><span class="pl-k">var</span> names = TimeZoneNames.GetNamesForTimeZone(<span class="pl-s"><span class="pl-pds">"</span>America/Los_Angeles<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>en-US<span class="pl-pds">"</span></span>);
 
-names.Generic == "Pacific Time"
-names.Standard == "Pacific Standard Time"
-names.Daylight == "Pacific Daylight Time"
-</code></pre>
+names.Generic == <span class="pl-s"><span class="pl-pds">"</span>Pacific Time<span class="pl-pds">"</span></span>
+names.Standard == <span class="pl-s"><span class="pl-pds">"</span>Pacific Standard Time<span class="pl-pds">"</span></span>
+names.Daylight == <span class="pl-s"><span class="pl-pds">"</span>Pacific Daylight Time<span class="pl-pds">"</span></span></pre></div>
 
-<pre><code>var names = TimeZoneNames.GetNamesForTimeZone("America/Los_Angeles", "fr-CA");
+<div class="highlight highlight-csharp"><pre><span class="pl-k">var</span> names = TimeZoneNames.GetNamesForTimeZone(<span class="pl-s"><span class="pl-pds">"</span>America/Los_Angeles<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>fr-CA<span class="pl-pds">"</span></span>);
 
-names.Generic == "heure du Pacifique"
-names.Standard == "heure normale du Pacifique"
-names.Daylight == "heure avancée du Pacifique"
-</code></pre>
+names.Generic == <span class="pl-s"><span class="pl-pds">"</span>heure du Pacifique<span class="pl-pds">"</span></span>
+names.Standard == <span class="pl-s"><span class="pl-pds">"</span>heure normale du Pacifique<span class="pl-pds">"</span></span>
+names.Daylight == <span class="pl-s"><span class="pl-pds">"</span>heure avancée du Pacifique<span class="pl-pds">"</span></span></pre></div>
 
 <p>You can pass a Windows time zone id instead, if you like:</p>
 
-<pre><code>var names = TimeZoneNames.GetNamesForTimeZone("Romance Standard Time", "en-GB");
+<div class="highlight highlight-csharp"><pre><span class="pl-k">var</span> names = TimeZoneNames.GetNamesForTimeZone(<span class="pl-s"><span class="pl-pds">"</span>Romance Standard Time<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>en-GB<span class="pl-pds">"</span></span>);
 
-names.Generic == "Central European Time"
-names.Standard == "Central European Standard Time"
-names.Daylight == "Central European Summer Time"
-</code></pre>
+names.Generic == <span class="pl-s"><span class="pl-pds">"</span>Central European Time<span class="pl-pds">"</span></span>
+names.Standard == <span class="pl-s"><span class="pl-pds">"</span>Central European Standard Time<span class="pl-pds">"</span></span>
+names.Daylight == <span class="pl-s"><span class="pl-pds">"</span>Central European Summer Time<span class="pl-pds">"</span></span></pre></div>
 
 <p>Abbreviations are also avaialble:</p>
 
-<pre><code>var abbreviations = TimeZoneNames.GetAbbreviationsForTimeZone("America/Los_Angeles", "en-US");
+<div class="highlight highlight-csharp"><pre><span class="pl-k">var</span> abbreviations = TimeZoneNames.GetAbbreviationsForTimeZone(<span class="pl-s"><span class="pl-pds">"</span>America/Los_Angeles<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>en-US<span class="pl-pds">"</span></span>);
 
-abbreviations.Generic == "PT"
-abbreviations.Standard == "PST"
-abbreviations.Daylight == "PDT"
-</code></pre>
+abbreviations.Generic == <span class="pl-s"><span class="pl-pds">"</span>PT<span class="pl-pds">"</span></span>
+abbreviations.Standard == <span class="pl-s"><span class="pl-pds">"</span>PST<span class="pl-pds">"</span></span>
+abbreviations.Daylight == <span class="pl-s"><span class="pl-pds">"</span>PDT<span class="pl-pds">"</span></span></pre></div>
 
 <p>Look up the time zones for a specific country:</p>
 
-<pre><code>string[] zones = TimeZoneNames.GetTimeZoneIdsForCountry("AU");
-</code></pre>
+<div class="highlight highlight-csharp"><pre><span class="pl-k">string</span>[] zones = TimeZoneNames.GetTimeZoneIdsForCountry(<span class="pl-s"><span class="pl-pds">"</span>AU<span class="pl-pds">"</span></span>);</pre></div>
 
 <p><em>Output</em></p>
 
@@ -104,8 +100,7 @@ Australia/Eucla
 
 <p>Get the time zone names for a specific country:</p>
 
-<pre><code>var zones = TimeZoneNames.GetTimeZonesForCountry("BR", "pt-BR");
-</code></pre>
+<div class="highlight highlight-csharp"><pre><span class="pl-k">var</span> zones = TimeZoneNames.GetTimeZonesForCountry(<span class="pl-s"><span class="pl-pds">"</span>BR<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>pt-BR<span class="pl-pds">"</span></span>);</pre></div>
 
 <p><em>Output</em></p>
 
@@ -196,7 +191,7 @@ Daylight = Horário de Verão do Acre
     <div id="footer_wrap" class="outer">
       <footer class="inner">
         <p class="copyright">TimeZoneNames maintained by <a href="https://github.com/mj1856">mj1856</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
       </footer>
     </div>
 
