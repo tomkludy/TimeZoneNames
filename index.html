@@ -34,28 +34,46 @@
         <h1>
 <a id="timezonenames" class="anchor" href="#timezonenames" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>TimeZoneNames</h1>
 
-<p><a href="https://gitter.im/mj1856/TimeZoneNames?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://badges.gitter.im/Join%20Chat.svg" alt="Join the chat at https://gitter.im/mj1856/TimeZoneNames"></a></p>
+<p>A simple portable class library that provides localized time zone names using CLDR and TZDB sources.</p>
 
-<p>Simple portable class library that provides localized time zone names using CLDR and TZDB sources.</p>
-
-<p>Why?  Because .NET's usual time zone display names are not localized properly, and are often wrong.
+<p>Why?  Because .NET's usual time zone display names are not localized properly, and are often wrong or unsuitable for various scenarios.
 Read <a href="http://codeofmatt.com/2014/12/26/localized-time-zone-names-in-net/">this blog post</a> for more details.</p>
 
-<p><strong>Nuget Installation</strong></p>
+<h1>
+<a id="nuget-installation" class="anchor" href="#nuget-installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Nuget Installation</h1>
 
 <div class="highlight highlight-source-powershell"><pre>PM<span class="pl-k">&gt;</span> <span class="pl-c1">Install-Package</span> TimeZoneNames</pre></div>
 
-<p><strong>Usage</strong></p>
+<h1>
+<a id="notes" class="anchor" href="#notes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Notes</h1>
+
+<p>Version 2.0 introduces some breaking changes, fills in some gaps, and adds a
+whole lot more functionality.  Please upgrade with care.  Thanks.</p>
+
+<h1>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h1>
+
+<p>First, import the <code>TimeZoneNames</code> namespace:</p>
+
+<div class="highlight highlight-source-cs"><pre><span class="pl-k">using</span> TimeZoneNames<span class="pl-k">;</span></pre></div>
+
+<p>All functionality is provided as static methods from the <code>TZNames</code> class.</p>
+
+<h2>
+<a id="methods-for-localizing-a-single-time-zone" class="anchor" href="#methods-for-localizing-a-single-time-zone" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Methods for localizing a single time zone</h2>
+
+<h3>
+<a id="getnamesfortimezone" class="anchor" href="#getnamesfortimezone" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>GetNamesForTimeZone</h3>
 
 <p>Look up the localized names for a specific time zone:</p>
 
-<div class="highlight highlight-source-cs"><pre><span class="pl-k">var</span> names = TimeZoneNames.GetNamesForTimeZone(<span class="pl-s"><span class="pl-pds">"</span>America/Los_Angeles<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>en-US<span class="pl-pds">"</span></span>);
+<div class="highlight highlight-source-cs"><pre><span class="pl-k">var</span> names = TZNames.GetNamesForTimeZone(<span class="pl-s"><span class="pl-pds">"</span>America/Los_Angeles<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>en-US<span class="pl-pds">"</span></span>);
 
 names.Generic == <span class="pl-s"><span class="pl-pds">"</span>Pacific Time<span class="pl-pds">"</span></span>
 names.Standard == <span class="pl-s"><span class="pl-pds">"</span>Pacific Standard Time<span class="pl-pds">"</span></span>
 names.Daylight == <span class="pl-s"><span class="pl-pds">"</span>Pacific Daylight Time<span class="pl-pds">"</span></span></pre></div>
 
-<div class="highlight highlight-source-cs"><pre><span class="pl-k">var</span> names = TimeZoneNames.GetNamesForTimeZone(<span class="pl-s"><span class="pl-pds">"</span>America/Los_Angeles<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>fr-CA<span class="pl-pds">"</span></span>);
+<div class="highlight highlight-source-cs"><pre><span class="pl-k">var</span> names = TZNames.GetNamesForTimeZone(<span class="pl-s"><span class="pl-pds">"</span>America/Los_Angeles<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>fr-CA<span class="pl-pds">"</span></span>);
 
 names.Generic == <span class="pl-s"><span class="pl-pds">"</span>heure du Pacifique<span class="pl-pds">"</span></span>
 names.Standard == <span class="pl-s"><span class="pl-pds">"</span>heure normale du Pacifique<span class="pl-pds">"</span></span>
@@ -63,127 +81,304 @@ names.Daylight == <span class="pl-s"><span class="pl-pds">"</span>heure avancée
 
 <p>You can pass a Windows time zone id instead, if you like:</p>
 
-<div class="highlight highlight-source-cs"><pre><span class="pl-k">var</span> names = TimeZoneNames.GetNamesForTimeZone(<span class="pl-s"><span class="pl-pds">"</span>Romance Standard Time<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>en-GB<span class="pl-pds">"</span></span>);
+<div class="highlight highlight-source-cs"><pre><span class="pl-k">var</span> names = TZNames.GetNamesForTimeZone(<span class="pl-s"><span class="pl-pds">"</span>Romance Standard Time<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>en-GB<span class="pl-pds">"</span></span>);
 
 names.Generic == <span class="pl-s"><span class="pl-pds">"</span>Central European Time<span class="pl-pds">"</span></span>
 names.Standard == <span class="pl-s"><span class="pl-pds">"</span>Central European Standard Time<span class="pl-pds">"</span></span>
 names.Daylight == <span class="pl-s"><span class="pl-pds">"</span>Central European Summer Time<span class="pl-pds">"</span></span></pre></div>
 
-<p>Abbreviations are also avaialble:</p>
+<h3>
+<a id="getabbreviationsfortimezone" class="anchor" href="#getabbreviationsfortimezone" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>GetAbbreviationsForTimeZone</h3>
 
-<div class="highlight highlight-source-cs"><pre><span class="pl-k">var</span> abbreviations = TimeZoneNames.GetAbbreviationsForTimeZone(<span class="pl-s"><span class="pl-pds">"</span>America/Los_Angeles<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>en-US<span class="pl-pds">"</span></span>);
+<p>Look up the localized abbreviations for a specific time zone:</p>
+
+<div class="highlight highlight-source-cs"><pre><span class="pl-k">var</span> abbreviations = TZNames.GetAbbreviationsForTimeZone(<span class="pl-s"><span class="pl-pds">"</span>America/Los_Angeles<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>en-US<span class="pl-pds">"</span></span>);
 
 abbreviations.Generic == <span class="pl-s"><span class="pl-pds">"</span>PT<span class="pl-pds">"</span></span>
 abbreviations.Standard == <span class="pl-s"><span class="pl-pds">"</span>PST<span class="pl-pds">"</span></span>
 abbreviations.Daylight == <span class="pl-s"><span class="pl-pds">"</span>PDT<span class="pl-pds">"</span></span></pre></div>
 
-<p>Look up the time zones for a specific country:</p>
+<p>You can pass a Windows time zone id instead, if you like:</p>
 
-<div class="highlight highlight-source-cs"><pre><span class="pl-k">string</span>[] zones = TimeZoneNames.GetTimeZoneIdsForCountry(<span class="pl-s"><span class="pl-pds">"</span>AU<span class="pl-pds">"</span></span>);</pre></div>
+<div class="highlight highlight-source-cs"><pre><span class="pl-k">var</span> abbreviations = TZNames.GetAbbreviationsForTimeZone(<span class="pl-s"><span class="pl-pds">"</span>Romance Standard Time<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>en-GB<span class="pl-pds">"</span></span>);
+
+names.Generic == <span class="pl-s"><span class="pl-pds">"</span>CET<span class="pl-pds">"</span></span>
+abbreviations.Standard == <span class="pl-s"><span class="pl-pds">"</span>CET<span class="pl-pds">"</span></span>
+abbreviations.Daylight == <span class="pl-s"><span class="pl-pds">"</span>CEST<span class="pl-pds">"</span></span></pre></div>
+
+<p><strong>Note:</strong> Time zone abbreviations are sometimes inconsistent, and are not necessarily
+localized correctly for every time zone.  In most cases, you should use abbreviations
+for end-user display output only.  Do not attempt to use abbreviations when parsing input.</p>
+
+<h2>
+<a id="methods-for-listing-time-zones" class="anchor" href="#methods-for-listing-time-zones" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Methods for listing time zones</h2>
+
+<h3>
+<a id="gettimezonesforcountry" class="anchor" href="#gettimezonesforcountry" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>GetTimeZonesForCountry</h3>
+
+<p>Get a list of time zone names for a specific country, suitable for user time zone
+selection.</p>
+
+<p>Returns a dictionary whose key is the IANA time zone identifier, and whose value
+is the localized generic time zone name.  When more than one entry in the result
+set shares the same name, then a localized city name is appended in parenthesis
+to disambiguate.  (This is usually due to historical differences.)</p>
+
+<div class="highlight highlight-source-cs"><pre><span class="pl-k">var</span> zones = TZNames.GetTimeZonesForCountry(<span class="pl-s"><span class="pl-pds">"</span>BR<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>pt-BR<span class="pl-pds">"</span></span>);</pre></div>
 
 <p><em>Output</em></p>
 
-<pre><code>Australia/Lord_Howe
-Antarctica/Macquarie
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>America/Eirunepe</td>
+<td>Horário do Acre (Eirunepé)</td>
+</tr>
+<tr>
+<td>America/Rio_Branco</td>
+<td>Horário do Acre (Rio Branco)</td>
+</tr>
+<tr>
+<td>America/Porto_Velho</td>
+<td>Horário do Amazonas (Porto Velho)</td>
+</tr>
+<tr>
+<td>America/Boa_Vista</td>
+<td>Horário do Amazonas (Boa Vista)</td>
+</tr>
+<tr>
+<td>America/Manaus</td>
+<td>Horário do Amazonas (Manaus)</td>
+</tr>
+<tr>
+<td>America/Campo_Grande</td>
+<td>Horário do Amazonas (Campo Grande)</td>
+</tr>
+<tr>
+<td>America/Cuiaba</td>
+<td>Horário do Amazonas (Cuiabá)</td>
+</tr>
+<tr>
+<td>America/Belem</td>
+<td>Horário de Brasília (Belém)</td>
+</tr>
+<tr>
+<td>America/Fortaleza</td>
+<td>Horário de Brasília (Fortaleza)</td>
+</tr>
+<tr>
+<td>America/Recife</td>
+<td>Horário de Brasília (Recife)</td>
+</tr>
+<tr>
+<td>America/Araguaina</td>
+<td>Horário de Brasília (Araguaína)</td>
+</tr>
+<tr>
+<td>America/Maceio</td>
+<td>Horário de Brasília (Maceió)</td>
+</tr>
+<tr>
+<td>America/Bahia</td>
+<td>Horário de Brasília (Bahia)</td>
+</tr>
+<tr>
+<td>America/Santarem</td>
+<td>Horário de Brasília (Santarém)</td>
+</tr>
+<tr>
+<td>America/Sao_Paulo</td>
+<td>Horário de Brasília (São Paulo)</td>
+</tr>
+<tr>
+<td>America/Noronha</td>
+<td>Horário de Fernando de Noronha</td>
+</tr>
+</tbody>
+</table>
+
+<p>Many scenarios don't require all time zones, so you can specify a <code>threshold</code>
+date as an optional parameter:</p>
+
+<div class="highlight highlight-source-cs"><pre><span class="pl-k">var</span> zones = TZNames.GetTimeZonesForCountry(<span class="pl-s"><span class="pl-pds">"</span>BR<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>pt-BR<span class="pl-pds">"</span></span>, <span class="pl-k">new</span> DateTime(<span class="pl-c1">2010</span>, <span class="pl-c1">1</span>, <span class="pl-c1">1</span>));</pre></div>
+
+<p><em>Output</em></p>
+
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>America/Rio_Branco</td>
+<td>Horário do Acre</td>
+</tr>
+<tr>
+<td>America/Manaus</td>
+<td>Horário do Amazonas (Manaus)</td>
+</tr>
+<tr>
+<td>America/Cuiaba</td>
+<td>Horário do Amazonas (Cuiabá)</td>
+</tr>
+<tr>
+<td>America/Fortaleza</td>
+<td>Horário de Brasília (Fortaleza)</td>
+</tr>
+<tr>
+<td>America/Araguaina</td>
+<td>Horário de Brasília (Araguaína)</td>
+</tr>
+<tr>
+<td>America/Bahia</td>
+<td>Horário de Brasília (Bahia)</td>
+</tr>
+<tr>
+<td>America/Sao_Paulo</td>
+<td>Horário de Brasília (São Paulo)</td>
+</tr>
+<tr>
+<td>America/Noronha</td>
+<td>Horário de Fernando de Noronha</td>
+</tr>
+</tbody>
+</table>
+
+<p>If you are not concerned with historical time zone differences at all, then
+pass <code>DateTimeOffset.UtcNow</code> to return only time zones that differ in the future.</p>
+
+<div class="highlight highlight-source-cs"><pre><span class="pl-k">var</span> zones = TZNames.GetTimeZonesForCountry(<span class="pl-s"><span class="pl-pds">"</span>BR<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>pt-BR<span class="pl-pds">"</span></span>, DateTimeOffset.UtcNow);</pre></div>
+
+<p><em>Output</em></p>
+
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>America/Rio_Branco</td>
+<td>Horário do Acre</td>
+</tr>
+<tr>
+<td>America/Manaus</td>
+<td>Horário do Amazonas (Manaus)</td>
+</tr>
+<tr>
+<td>America/Cuiaba</td>
+<td>Horário do Amazonas (Cuiabá)</td>
+</tr>
+<tr>
+<td>America/Bahia</td>
+<td>Horário de Brasília (Bahia)</td>
+</tr>
+<tr>
+<td>America/Sao_Paulo</td>
+<td>Horário de Brasília (São Paulo)</td>
+</tr>
+<tr>
+<td>America/Noronha</td>
+<td>Horário de Fernando de Noronha</td>
+</tr>
+</tbody>
+</table>
+
+<h3>
+<a id="gettimezoneidsforcountry" class="anchor" href="#gettimezoneidsforcountry" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>GetTimeZoneIdsForCountry</h3>
+
+<p>Get a list of time zone identifiers for a specific country.  Similar to the
+<code>GetTimeZonesForCountry</code> method, but without localized names.</p>
+
+<div class="highlight highlight-source-cs"><pre><span class="pl-k">string</span>[] zones = TZNames.GetTimeZoneIdsForCountry(<span class="pl-s"><span class="pl-pds">"</span>AU<span class="pl-pds">"</span></span>);</pre></div>
+
+<p><em>Output</em></p>
+
+<pre><code>Australia/Perth
+Australia/Eucla
+Australia/Darwin
+Australia/Broken_Hill
+Australia/Adelaide
+Australia/Brisbane
+Australia/Lindeman
 Australia/Hobart
 Australia/Currie
 Australia/Melbourne
 Australia/Sydney
-Australia/Broken_Hill
-Australia/Brisbane
-Australia/Lindeman
-Australia/Adelaide
-Australia/Darwin
-Australia/Perth
-Australia/Eucla
+Australia/Lord_Howe
+Antarctica/Macquarie
 </code></pre>
 
-<p>Get the time zone names for a specific country:</p>
+<p>Like the <code>GetTimeZonesForCountry</code> method, an optional <code>threshold</code> parameter is
+supported for limiting the list to those zones that vary only after a specific
+date.</p>
 
-<div class="highlight highlight-source-cs"><pre><span class="pl-k">var</span> zones = TimeZoneNames.GetTimeZonesForCountry(<span class="pl-s"><span class="pl-pds">"</span>BR<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>pt-BR<span class="pl-pds">"</span></span>);</pre></div>
+<div class="highlight highlight-source-cs"><pre><span class="pl-k">string</span>[] zones = TZNames.GetTimeZoneIdsForCountry(<span class="pl-s"><span class="pl-pds">"</span>AU<span class="pl-pds">"</span></span>, DateTimeOffset.Now);</pre></div>
 
 <p><em>Output</em></p>
 
-<pre><code>America/Noronha
-Generic  = Horário de Fernando de Noronha
-Standard = Horário Padrão de Fernando de Noronha
-Daylight = Horário de Verão de Fernando de Noronha
-
-America/Belem
-Generic  = Horário de Brasília
-Standard = Horário Padrão de Brasília
-Daylight = Horário de Verão de Brasília
-
-America/Fortaleza
-Generic  = Horário de Brasília
-Standard = Horário Padrão de Brasília
-Daylight = Horário de Verão de Brasília
-
-America/Recife
-Generic  = Horário de Brasília
-Standard = Horário Padrão de Brasília
-Daylight = Horário de Verão de Brasília
-
-America/Araguaina
-Generic  = Horário de Brasília
-Standard = Horário Padrão de Brasília
-Daylight = Horário de Verão de Brasília
-
-America/Maceio
-Generic  = Horário de Brasília
-Standard = Horário Padrão de Brasília
-Daylight = Horário de Verão de Brasília
-
-America/Bahia
-Generic  = Horário de Brasília
-Standard = Horário Padrão de Brasília
-Daylight = Horário de Verão de Brasília
-
-America/Sao_Paulo
-Generic  = Horário de Brasília
-Standard = Horário Padrão de Brasília
-Daylight = Horário de Verão de Brasília
-
-America/Campo_Grande
-Generic  = Horário do Amazonas
-Standard = Horário Padrão do Amazonas
-Daylight = Horário de Verão do Amazonas
-
-America/Cuiaba
-Generic  = Horário do Amazonas
-Standard = Horário Padrão do Amazonas
-Daylight = Horário de Verão do Amazonas
-
-America/Santarem
-Generic  = Horário de Brasília
-Standard = Horário Padrão de Brasília
-Daylight = Horário de Verão de Brasília
-
-America/Porto_Velho
-Generic  = Horário do Amazonas
-Standard = Horário Padrão do Amazonas
-Daylight = Horário de Verão do Amazonas
-
-America/Boa_Vista
-Generic  = Horário do Amazonas
-Standard = Horário Padrão do Amazonas
-Daylight = Horário de Verão do Amazonas
-
-America/Manaus
-Generic  = Horário do Amazonas
-Standard = Horário Padrão do Amazonas
-Daylight = Horário de Verão do Amazonas
-
-America/Eirunepe
-Generic  = Horário do Acre
-Standard = Horário Padrão do Acre
-Daylight = Horário de Verão do Acre
-
-America/Rio_Branco
-Generic  = Horário do Acre
-Standard = Horário Padrão do Acre
-Daylight = Horário de Verão do Acre
+<pre><code>Australia/Perth
+Australia/Eucla
+Australia/Darwin
+Australia/Adelaide
+Australia/Brisbane
+Australia/Sydney
+Australia/Lord_Howe
+Antarctica/Macquarie
 </code></pre>
+
+<h3>
+<a id="getfixedtimezoneids" class="anchor" href="#getfixedtimezoneids" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>GetFixedTimeZoneIds</h3>
+
+<p>Gets a list of time zone IDs that represent fixed offset from UTC, including UTC itself.
+Note that time zones of the form <code>Etc/GMT[+/-]n</code> use an inverted sign from the usual
+conventions.</p>
+
+<p>TODO: Add examples for this method.</p>
+
+<h3>
+<a id="getfixedtimezonenames" class="anchor" href="#getfixedtimezonenames" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>GetFixedTimeZoneNames</h3>
+
+<p>Gets the same list of zones as <code>GetFixedTimeZoneIds</code>, but includes localized names.</p>
+
+<p>TODO: Add examples for this method.</p>
+
+<h3>
+<a id="getfixedtimezoneabbreviations" class="anchor" href="#getfixedtimezoneabbreviations" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>GetFixedTimeZoneAbbreviations</h3>
+
+<p>Gets the same list of zones as <code>GetFixedTimeZoneIds</code>, but includes localized abbreviations.</p>
+
+<p>TODO: Add examples for this method.</p>
+
+<h2>
+<a id="additional-supporting-methods" class="anchor" href="#additional-supporting-methods" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Additional supporting methods</h2>
+
+<h3>
+<a id="getcountrynames" class="anchor" href="#getcountrynames" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>GetCountryNames</h3>
+
+<p>Gets a localized list of country names, suitable for selecting a country before
+selecting a time zone in a two-dropdown time zone selection control.</p>
+
+<p>TODO: Add examples for this method.</p>
+
+<h3>
+<a id="getlanguagecodes" class="anchor" href="#getlanguagecodes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>GetLanguageCodes</h3>
+
+<p>Gets a list of all language codes supported by this library.  Useful for testing
+and validation.</p>
+
+<p>TODO: Add examples for this method.</p>
       </section>
     </div>
 
