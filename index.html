@@ -32,7 +32,7 @@
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
         <h1>
-<a id="timezonenames" class="anchor" href="#timezonenames" aria-hidden="true"><span class="octicon octicon-link"></span></a>TimeZoneNames</h1>
+<a id="timezonenames" class="anchor" href="#timezonenames" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>TimeZoneNames</h1>
 
 <p><a href="https://gitter.im/mj1856/TimeZoneNames?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://badges.gitter.im/Join%20Chat.svg" alt="Join the chat at https://gitter.im/mj1856/TimeZoneNames"></a></p>
 
@@ -43,19 +43,19 @@ Read <a href="http://codeofmatt.com/2014/12/26/localized-time-zone-names-in-net/
 
 <p><strong>Nuget Installation</strong></p>
 
-<div class="highlight highlight-powershell"><pre>PM<span class="pl-k">&gt;</span> <span class="pl-c1">Install-Package</span> TimeZoneNames</pre></div>
+<div class="highlight highlight-source-powershell"><pre>PM<span class="pl-k">&gt;</span> <span class="pl-c1">Install-Package</span> TimeZoneNames</pre></div>
 
 <p><strong>Usage</strong></p>
 
 <p>Look up the localized names for a specific time zone:</p>
 
-<div class="highlight highlight-csharp"><pre><span class="pl-k">var</span> names = TimeZoneNames.GetNamesForTimeZone(<span class="pl-s"><span class="pl-pds">"</span>America/Los_Angeles<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>en-US<span class="pl-pds">"</span></span>);
+<div class="highlight highlight-source-cs"><pre><span class="pl-k">var</span> names = TimeZoneNames.GetNamesForTimeZone(<span class="pl-s"><span class="pl-pds">"</span>America/Los_Angeles<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>en-US<span class="pl-pds">"</span></span>);
 
 names.Generic == <span class="pl-s"><span class="pl-pds">"</span>Pacific Time<span class="pl-pds">"</span></span>
 names.Standard == <span class="pl-s"><span class="pl-pds">"</span>Pacific Standard Time<span class="pl-pds">"</span></span>
 names.Daylight == <span class="pl-s"><span class="pl-pds">"</span>Pacific Daylight Time<span class="pl-pds">"</span></span></pre></div>
 
-<div class="highlight highlight-csharp"><pre><span class="pl-k">var</span> names = TimeZoneNames.GetNamesForTimeZone(<span class="pl-s"><span class="pl-pds">"</span>America/Los_Angeles<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>fr-CA<span class="pl-pds">"</span></span>);
+<div class="highlight highlight-source-cs"><pre><span class="pl-k">var</span> names = TimeZoneNames.GetNamesForTimeZone(<span class="pl-s"><span class="pl-pds">"</span>America/Los_Angeles<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>fr-CA<span class="pl-pds">"</span></span>);
 
 names.Generic == <span class="pl-s"><span class="pl-pds">"</span>heure du Pacifique<span class="pl-pds">"</span></span>
 names.Standard == <span class="pl-s"><span class="pl-pds">"</span>heure normale du Pacifique<span class="pl-pds">"</span></span>
@@ -63,7 +63,7 @@ names.Daylight == <span class="pl-s"><span class="pl-pds">"</span>heure avancée
 
 <p>You can pass a Windows time zone id instead, if you like:</p>
 
-<div class="highlight highlight-csharp"><pre><span class="pl-k">var</span> names = TimeZoneNames.GetNamesForTimeZone(<span class="pl-s"><span class="pl-pds">"</span>Romance Standard Time<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>en-GB<span class="pl-pds">"</span></span>);
+<div class="highlight highlight-source-cs"><pre><span class="pl-k">var</span> names = TimeZoneNames.GetNamesForTimeZone(<span class="pl-s"><span class="pl-pds">"</span>Romance Standard Time<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>en-GB<span class="pl-pds">"</span></span>);
 
 names.Generic == <span class="pl-s"><span class="pl-pds">"</span>Central European Time<span class="pl-pds">"</span></span>
 names.Standard == <span class="pl-s"><span class="pl-pds">"</span>Central European Standard Time<span class="pl-pds">"</span></span>
@@ -71,7 +71,7 @@ names.Daylight == <span class="pl-s"><span class="pl-pds">"</span>Central Europe
 
 <p>Abbreviations are also avaialble:</p>
 
-<div class="highlight highlight-csharp"><pre><span class="pl-k">var</span> abbreviations = TimeZoneNames.GetAbbreviationsForTimeZone(<span class="pl-s"><span class="pl-pds">"</span>America/Los_Angeles<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>en-US<span class="pl-pds">"</span></span>);
+<div class="highlight highlight-source-cs"><pre><span class="pl-k">var</span> abbreviations = TimeZoneNames.GetAbbreviationsForTimeZone(<span class="pl-s"><span class="pl-pds">"</span>America/Los_Angeles<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>en-US<span class="pl-pds">"</span></span>);
 
 abbreviations.Generic == <span class="pl-s"><span class="pl-pds">"</span>PT<span class="pl-pds">"</span></span>
 abbreviations.Standard == <span class="pl-s"><span class="pl-pds">"</span>PST<span class="pl-pds">"</span></span>
@@ -79,7 +79,7 @@ abbreviations.Daylight == <span class="pl-s"><span class="pl-pds">"</span>PDT<sp
 
 <p>Look up the time zones for a specific country:</p>
 
-<div class="highlight highlight-csharp"><pre><span class="pl-k">string</span>[] zones = TimeZoneNames.GetTimeZoneIdsForCountry(<span class="pl-s"><span class="pl-pds">"</span>AU<span class="pl-pds">"</span></span>);</pre></div>
+<div class="highlight highlight-source-cs"><pre><span class="pl-k">string</span>[] zones = TimeZoneNames.GetTimeZoneIdsForCountry(<span class="pl-s"><span class="pl-pds">"</span>AU<span class="pl-pds">"</span></span>);</pre></div>
 
 <p><em>Output</em></p>
 
@@ -100,7 +100,7 @@ Australia/Eucla
 
 <p>Get the time zone names for a specific country:</p>
 
-<div class="highlight highlight-csharp"><pre><span class="pl-k">var</span> zones = TimeZoneNames.GetTimeZonesForCountry(<span class="pl-s"><span class="pl-pds">"</span>BR<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>pt-BR<span class="pl-pds">"</span></span>);</pre></div>
+<div class="highlight highlight-source-cs"><pre><span class="pl-k">var</span> zones = TimeZoneNames.GetTimeZonesForCountry(<span class="pl-s"><span class="pl-pds">"</span>BR<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>pt-BR<span class="pl-pds">"</span></span>);</pre></div>
 
 <p><em>Output</em></p>
 
