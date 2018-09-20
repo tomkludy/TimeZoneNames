@@ -14,7 +14,7 @@ namespace TimeZoneNames.DataBuilder
             var outputFilePath = Path.Combine(path, dataFileName);
             extractor.SaveData(outputFilePath);
 
-            File.Copy(outputFilePath, $@"..\TimeZoneNames\{dataFileName}", true);
+            File.Copy(outputFilePath, Path.Combine("..", "TimeZoneNames", dataFileName), true);
         }
     }
 }

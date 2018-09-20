@@ -21,8 +21,8 @@ namespace TimeZoneNames.DataBuilder
 
         private DataExtractor(string dataPath)
         {
-            _cldrPath = Path.Combine(dataPath, "cldr") + "\\";
-            _nzdPath = Path.Combine(dataPath, "nzd") + "\\";
+            _cldrPath = Path.Combine(dataPath, "cldr") + Path.DirectorySeparatorChar;
+            _nzdPath = Path.Combine(dataPath, "nzd") + Path.DirectorySeparatorChar;
         }
 
         public static DataExtractor Load(string dataPath, bool overwrite)
@@ -131,7 +131,7 @@ namespace TimeZoneNames.DataBuilder
         {
             var results = new List<TimeZoneSelectionData>();
 
-            var precedence = File.ReadAllLines(@"data\zone-precedence.txt");
+            var precedence = File.ReadAllLines(Path.Combine("data", "zone-precedence.txt"));
 
             var splitPoints = GetAllZoneSplitPoints();
             IList<string> last = null;
@@ -260,7 +260,7 @@ namespace TimeZoneNames.DataBuilder
 
         private void LoadZoneAliases()
         {
-            using (var stream = File.OpenRead(_cldrPath + @"common\bcp47\timezone.xml"))
+            using (var stream = File.OpenRead(_cldrPath + Path.Combine("common", "bcp47", "timezone.xml")))
             {
                 var doc = XDocument.Load(stream);
                 var elements = doc.XPathSelectElements("/ldmlBCP47/keyword/key[@name='tz']/type");
@@ -282,8 +282,8 @@ namespace TimeZoneNames.DataBuilder
 
         private void LoadMetaZones()
         {
-            LoadMetaZonesFromFile(_cldrPath + @"common\supplemental\metaZones.xml");
-            LoadMetaZonesFromFile(@"data\metaZones-override.xml");
+            LoadMetaZonesFromFile(_cldrPath + Path.Combine("common", "supplemental", "metaZones.xml"));
+            LoadMetaZonesFromFile(Path.Combine("data", "metaZones-override.xml"));
         }
 
         private void LoadMetaZonesFromFile(string path)
@@ -320,7 +320,7 @@ namespace TimeZoneNames.DataBuilder
 
         private void LoadLanguages()
         {
-            var languages = Directory.GetFiles(_cldrPath + @"common\main")
+            var languages = Directory.GetFiles(_cldrPath + Path.Combine("common", "main"))
                 .Select(Path.GetFileName)
                 .Select(x => x.Substring(0, x.Length - 4));
 
@@ -329,7 +329,7 @@ namespace TimeZoneNames.DataBuilder
 
         private void LoadLanguage(string language)
         {
-            using (var stream = File.OpenRead(_cldrPath + @"common\main\" + language + ".xml"))
+            using (var stream = File.OpenRead(_cldrPath + Path.Combine("common", "main") + Path.DirectorySeparatorChar + language + ".xml"))
             {
                 var doc = XDocument.Load(stream);
 
