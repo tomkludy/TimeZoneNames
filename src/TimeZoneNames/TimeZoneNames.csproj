@@ -11,6 +11,8 @@
     <IncludeSource>True</IncludeSource>
     <IncludeSymbols>True</IncludeSymbols>
     <Version>3.3.2</Version>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>TimeZoneNames.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
@@ -30,7 +32,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="TimeZoneConverter" Version="2.3.2" />
+    <!--<PackageReference Include="TimeZoneConverter" Version="2.3.2" />-->
+    <Reference Include="TimeZoneConverter">
+      <HintPath>..\..\..\TimeZoneConverter\src\TimeZoneConverter\bin\$(Configuration)\$(TargetFramework)\TimeZoneConverter.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
